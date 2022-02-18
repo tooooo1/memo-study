@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import CommentItem from './CommentItem';
 import { useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
+// import { countup } from "../features/tasksSlice";
 
 const Wrapper = styled.div`
     && {
@@ -17,12 +19,22 @@ const Wrapper = styled.div`
 
 const CommentsList = () => {
     const memos = useSelector((state) => state.tasks);
+    // const dispatch = useDispatch();
+
+    // const tick = () => { 
+    //     dispatch(countup(memos.del));
+    // };
+
+    // useEffect(() => {
+    //     const timer = setInterval(() => tick(), 1000);
+    //     return () => clearInterval(timer);
+    // });
 
     return (
         <Wrapper>
             <ul>
 			{memos.map((memo) => (
-                <CommentItem id={memo.id} loginid = {memo.login} title={memo.text} completed={memo.status} />
+                <CommentItem id={memo.id} loginid = {memo.login} text={memo.text} year={memo.year} del={memo.del} month={memo.month} day={memo.day} />
 			))}
 		    </ul>
         </Wrapper>

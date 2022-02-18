@@ -36,6 +36,7 @@ const AddComment = () => {
 			addTask({
                 task: value,
                 pop: login,
+                del: 0,
 			})
 		);
 

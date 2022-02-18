@@ -1,15 +1,12 @@
 import React from 'react';
 import { AddComment, LoginTop, CommentsList } from '../Components'
 
-
-const Main = () => {
-    return (
-    <>
-            <LoginTop />
-            <AddComment />
-            <CommentsList></CommentsList>
-    </>
-    )
-};
+const Main = () => (
+        <>
+                <LoginTop />
+                <AddComment />
+                <CommentsList />
+        </>
+);
 
 export default Main;
