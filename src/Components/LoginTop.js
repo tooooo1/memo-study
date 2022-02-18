@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from "react-redux";
+import { loginTask } from '../features/loginSlice';
 
 const Wrapper = styled.div`
     && {
@@ -50,13 +52,38 @@ export const Input = styled.input`
     margin: 0 1rem;
 `;
 
-const LoginTop = ({ children, onClick, hide, zero, value, ...rest }) => (
-    <Wrapper>
-        {hide ? <ID>{value}</ID> : <Input {...rest}/> }
-        <Bt onClick={onClick} hide = {hide} disabled={zero}>
-            { hide ? "로그아웃" : "로그인"}
-        </Bt>
-    </Wrapper>
-);
+const LoginTop = () => {
+    const [value, setValue] = useState('');
+    const [login, setLogin] = useState(false);
+    const [loginda, setLoginda] = useState(true);
+    const dispatch = useDispatch();
+
+    const handleLogin = (e) => {
+        if (e.target.value !== '') setLoginda(false);
+        
+        setValue(e.target.value);
+    }
+
+    const loginClick = () => {
+        setLogin(!login);
+        dispatch(loginTask(value));
+
+        if (login) {
+            setValue('');
+            setLoginda(true);
+            dispatch(loginTask(''));
+        }
+    }
+
+
+    return (
+        <Wrapper>
+            {login ? <ID>{value}</ID> : <Input onChange={handleLogin} />}
+            <Bt onClick={loginClick} disabled={loginda}>
+                {login ? "로그아웃" : "로그인"}
+            </Bt>
+        </Wrapper>
+    );
+};
 
 export default LoginTop;

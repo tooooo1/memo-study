@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { addTask } from "../features/tasksSlice";
 import styled from 'styled-components';
 import { Bt, Input } from './LoginTop'
@@ -16,13 +16,41 @@ const Wrapper = styled.div`
     }
 `;
 
-const CommentsList = ({ children, onClick, hide, ...rest }) => (
-    <Wrapper>
-        <Input {...rest}/>
-        <Bt onClick={onClick} disabled={hide}>
-            {children}
-        </Bt>
-    </Wrapper>
-);
+const AddComment = () => {
+    const login = useSelector((state) => state.login.value);
+    const [value, setValue] = useState('');
 
-export default CommentsList;
+    const dispatch = useDispatch();
+    
+    const onSubmit = (e) => {
+		e.preventDefault();
+
+		if(value.trim().length === 0)
+		{
+			alert("뭐라도 입력하세요.");
+			setValue("");
+			return;
+		}
+
+		dispatch(
+			addTask({
+                task: value,
+                pop: login,
+			})
+		);
+
+		setValue("");
+	};
+
+
+    return (
+        <Wrapper>
+            <Input value={value} onChange={(e) => setValue(e.target.value)} disabled={login === '' ? true : false } />
+            <Bt onClick={onSubmit} disabled={login === '' ? true : false }>
+                메모
+            </Bt>
+        </Wrapper>
+    );
+};
+
+export default AddComment;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Bt, Input } from './LoginTop'
+import CommentItem from './CommentItem';
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
     && {
@@ -8,19 +9,24 @@ const Wrapper = styled.div`
         margin: 1rem;
         margin-top: 5rem;
         justify-content: center;
-        background-color: #5a60a8;
+        background-color: #fbb034;
         padding: 1rem;
         border-radius: 12px;
     }
 `;
 
-const CommentsList = ({ children, onClick, hide, ...rest }) => (
-    <Wrapper>
-        <Input {...rest}/>
-        <Bt onClick={onClick} disabled={hide}>
-            {children}
-        </Bt>
-    </Wrapper>
-);
+const CommentsList = () => {
+    const memos = useSelector((state) => state.tasks);
+
+    return (
+        <Wrapper>
+            <ul>
+			{memos.map((memo) => (
+                <CommentItem id={memo.id} loginid = {memo.login} title={memo.text} completed={memo.status} />
+			))}
+		    </ul>
+        </Wrapper>
+    )
+};
 
 export default CommentsList;

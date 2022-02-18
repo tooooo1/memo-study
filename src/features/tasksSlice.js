@@ -7,7 +7,8 @@ export const tasksSlice = createSlice({
         addTask: (state, action)=>{
             const newTask = {
                 id: new Date(),
-                name: action.payload.task
+                text: action.payload.task,
+                login: action.payload.pop,
             }
             state.push(newTask);
         },
