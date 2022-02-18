@@ -9,6 +9,10 @@ export const tasksSlice = createSlice({
                 id: new Date(),
                 text: action.payload.task,
                 login: action.payload.pop,
+                year: new Date().getFullYear(),
+                month: new Date().getMonth(),
+                day: new Date().getDate(),
+                del: action.payload.del,
             }
             state.push(newTask);
         },
