@@ -12,16 +12,14 @@ export const tasksSlice = createSlice({
                 year: new Date().getFullYear(),
                 month: new Date().getMonth(),
                 day: new Date().getDate(),
-                del: action.payload.del,
+                sec: new Date().getSeconds(),
             }
             state.push(newTask);
         },
-        deleteTask: (state, action)=>{
-            return state.filter((item) => item.id !== action.payload.id);
-        }
+        deleteTask: (state, action) => state.filter((item) => item.id !== action.payload.id),
     }
 });
 
-export const {addTask, deleteTask} = tasksSlice.actions;
+export const {addTask, deleteTask } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

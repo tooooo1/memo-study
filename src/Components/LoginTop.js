@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { loginTask } from '../features/loginSlice';
 
 const Wrapper = styled.div`
@@ -75,12 +75,14 @@ const LoginTop = () => {
         }
     }
 
+    const loginID = useSelector((state) => state.login.value);
+
 
     return (
         <Wrapper>
-            {login ? <ID>{value}</ID> : <Input onChange={handleLogin} />}
-            <Bt onClick={loginClick} disabled={loginda}>
-                {login ? "로그아웃" : "로그인"}
+            {loginID !=='' ? <ID>{loginID}</ID> : <Input onChange={handleLogin} />}
+            <Bt onClick={loginClick} disabled={loginID ==='' && loginda}>
+                {loginID !=='' ? "로그아웃" : "로그인"}
             </Bt>
         </Wrapper>
     );
