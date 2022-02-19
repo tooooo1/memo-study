@@ -27,7 +27,7 @@ const AddComment = () => {
 
 		if(value.trim().length === 0)
 		{
-			alert("뭐라도 입력하세요.");
+			alert("입력해주세요.");
 			setValue("");
 			return;
 		}
@@ -36,7 +36,6 @@ const AddComment = () => {
 			addTask({
                 task: value,
                 pop: login,
-                del: 0,
 			})
 		);
 
